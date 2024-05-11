@@ -1,0 +1,57 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: 2px solid #000;
+}
+
+/* label {
+    padding: 10%;
+} */
+
+/* input[type=checkbox]:checked ~ label{ */
+input[type=checkbox]:checked~img {
+    background-color: #f41f98;
+}
+
+input[type=radio]:checked~img {
+    background-color: #390ec7;
+}
+
+input[type=checkbox] {
+    display: none;
+}
+
+input[type=radio] {
+    display: none;
+}
+
+img {
+    width: 100px;
+    height: 150px;
+    object-fit: cover;
+}
+
+#answer img {
+    padding: 5%;
+}
+
+#owncard img {
+    padding: 5%;
+}
+
+.flex {
+    display: flex;
+}
+
+.center {
+    align-items: center;
+    justify-content: center;
+}
+
+.around {
+    justify-content: space-around;
+}
+
+.column {
+    flex-flow: column;
+}
