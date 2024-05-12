@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>カードゲーム</title>
+</head>
+
+<body>
+    <h1>カードゲーム</h1>
+    <div id="answer" class="flex center">
+        <label for="A"><input type="radio" name="answer" id="A"><img src="img/A.jpg" alt="A"></label>
+        <label for="B"><input type="radio" name="answer" id="B"><img src="img/B.jpg" alt="B"></label>
+        <label for="C"><input type="radio" name="answer" id="C"><img src="img/C.jpg" alt="C"></label>
+        <label for="D"><input type="radio" name="answer" id="D"><img src="img/D.jpg" alt="D"></label>
+        <label for="J"><input type="radio" name="answer" id="J"><img src="img/J.jpg" alt="J"></label>
+    </div>
+    <!-- <img src="img/B.jpg" alt="B"> -->
+    <!-- <img src="img/C.jpg" alt="C"> -->
+    <!-- <img src="img/D.jpg" alt="D"> -->
+    <!-- <img src="img/J.jpg" alt="J"> -->
+    <!-- <img src="img/back.jpg" alt="back"> -->
+    <br>
+    <input id="answerbutton" type="button" value="Answer" onclick="answercheck()" />
+    <span></span>
+    <br><br>
+    <div class="flex around">
+        <div id="owncard" class="flex column">
+            <label for="first" class="flex center"><input type="checkbox" id="first" name="option" value="value1"><img
+                    src="img/A.jpg" alt="A"></label>
+            <label for="second" class="flex center"><input type="checkbox" id="second" name="option" value="value2"><img
+                    src="img/B.jpg" alt="B"></label>
+            <label for="third" class="flex center"><input type="checkbox" id="third" name="option" value="value3"><img
+                    src="img/C.jpg" alt="C"></label>
+            <input id="throw" type="button" value="Click" onclick="getSelectedValues()" />
+        </div>
+        <div id="throwaway" class="flex column center">
+            <img>
+            <img>
+            <img>
+        </div>
+        <div id="answercard" class="flex column center">
+            <img src="img/back.jpg" alt="back">
+            <img src="img/back.jpg" alt="back">
+            <img src="img/back.jpg" alt="back">
+        </div>
+        <div id="aithrowaway" class="flex column center">
+            <img>
+            <img>
+            <img>
+        </div>
+        <div class="flex column center">
+            <img src="img/back.jpg" alt="back">
+            <img src="img/back.jpg" alt="back">
+            <img src="img/back.jpg" alt="back">
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
