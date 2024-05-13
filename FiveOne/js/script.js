@@ -15,6 +15,16 @@ const testcard = [];
 
 let answercound = 0;
 
+// 残りのカード
+let restcard = document.getElementById('rest').querySelectorAll('img');
+
+for (let i = 0; i < card.length; i++) {
+    restcard[i].src = "img/" + card[i] + ".jpg";
+    restcard[i].alt = card[i];
+}
+
+console.log(restcard);
+
 // ボタン
 let answerbutton = document.getElementById('answerbutton');
 let throwbutton = document.getElementById('throw');
@@ -29,7 +39,9 @@ let raidoselect = document.querySelectorAll('[name="answer"]');
 
 for (let i = 0; i < raidoselect.length; i++) {
     raidoselect[i].onchange = event => {
-        answerbutton.disabled = false;
+        if (answercard.children[1].alt == "back") {
+            answerbutton.disabled = false;
+        }
     }
 }
 
@@ -67,6 +79,23 @@ console.log(shufflenumber);
 for (let i = 0; i < 3; i++) {
     owncard[i] = card[shufflenumber[i]];
     // console.log(number);
+
+    let check = true;
+
+    // 残りのカードから捨てたカードを消す
+    for (let j = 0; check == true && j < restcard.length; j++) {
+        if (restcard[j].alt == owncard[i]) {
+            switch (owncard[i]) {
+                case owncard[i]:
+                    restcard[j].src = "img/back.jpg";
+                    restcard[j].alt = "back";
+                    check = false;
+                    break;
+                default:
+                    console.log("");
+            }
+        }
+    }
 }
 
 // AIの手札
@@ -115,12 +144,15 @@ function answercheck() {
     if (radiochecked) {
         answercard.children[0].src = "img/" + radiochecked.id + ".jpg";
         imgchecked.src = "img/back.jpg";
+        imgchecked.alt = "back";
 
         // ボタンの無効化
         answerbutton.disabled = true;
+
         if (radiochecked.id == answer) {
             judgement = "正解";
             answercard.children[1].src = "img/" + answer + ".jpg";
+            answercard.children[1].alt = answer;
             alert("勝ち");
         } else {
             judgement = "不正解";
@@ -134,6 +166,10 @@ function answercheck() {
 
                 console.log("カードを探す：" + cardtext.indexOf(radiochecked.id));
                 cardtext.splice(cardtext.indexOf(radiochecked.id), 1);
+
+                // 選択されたラジオボタンを無効化
+                radiochecked.disabled = true;
+
                 console.log("残されたカード" + cardtext);
 
                 // aiが決めたカード
@@ -143,22 +179,29 @@ function answercheck() {
 
                 cardtext.splice(cardtext.indexOf(aiselectcard), 1);
 
-                const aiimgchecked = document.getElementById('answer').querySelector('img[alt="' + aiselectcard + '"]');
+                const aiimgcheckedimg = document.getElementById('answer').querySelector('img[alt="' + aiselectcard + '"]');
+
+                const aiimgchecked = document.getElementById('answer').querySelector('input[id="' + aiselectcard + '"]');
+
+                // 選択されたラジオボタンを無効化
+                aiimgchecked.disabled = true;
+
                 // AI１回目　カウント２
                 answercound++;
 
-                aiimgchecked.src = "img/back.jpg";
+                aiimgcheckedimg.src = "img/back.jpg";
                 // console.log("カードを探す：" + cardtext.find(element => element == radiochecked.id));
                 // arr.splice(selectnumber, 1);
 
                 answercard.children[2].src = "img/" + aiselectcard + ".jpg";
                 if (aiselectcard == answer) {
                     answercard.children[1].src = "img/" + answer + ".jpg";
+                    answercard.children[1].alt = answer;
                     alert("負け");
                 } else {
 
                 }
-            }, 3000)
+            }, 1000)
         }
         setjudgement[0].innerHTML = judgement;
     }
@@ -188,6 +231,25 @@ function aithrow() {
         aithrowaway.children[i].alt = aicard[i];
         // const num = owncard.find(element => element == throwaway.children[i].alt);
         // selectcheckbox[i].lastElementChild.src = "img/" + card[shufflenumber[i + 7]] + ".jpg";
+
+        let check = true;
+        // 残りのカードから捨てたカードを消す
+        for (let j = 0; check == true && j < restcard.length; j++) {
+            if (restcard[j].alt == aicard[i]) {
+                switch (aicard[i]) {
+                    case aicard[i]:
+                        restcard[j].src = "img/back.jpg";
+                        restcard[j].alt = "back";
+                        check = false;
+                        break;
+                    default:
+                        console.log("");
+                }
+            }
+        }
+
+        console.log("残りのカード：" + restcard);
+
         console.log("i：" + i);
     }
     console.log(aithrowawaycount);
@@ -253,6 +315,24 @@ function getSelectedValues() {
         const num = owncard.find(element => element == throwaway.children[i].alt);
 
         selectcheckbox[i].lastElementChild.src = "img/" + card[shufflenumber[i + 7]] + ".jpg";
+        let check = true;
+
+        // 残りのカードから捨てたカードを消す
+        for (let j = 0; check == true && j < restcard.length; j++) {
+            if (restcard[j].alt == card[shufflenumber[i + 7]]) {
+                switch (card[shufflenumber[i + 7]]) {
+                    case card[shufflenumber[i + 7]]:
+                        restcard[j].src = "img/back.jpg";
+                        restcard[j].alt = "back";
+                        check = false;
+                        break;
+                    default:
+                        console.log("");
+                }
+            }
+        }
+
+        console.log("残りのカード：" + restcard);
     }
 
     // 新しくカードを取得する
